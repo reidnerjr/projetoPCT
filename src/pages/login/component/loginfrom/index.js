@@ -1,27 +1,43 @@
-import React from 'react';
 import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
-import styles from "./styles";
+import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import Paper from '@material-ui/core/Paper';
+import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import { useFormik, Formik } from 'formik';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import * as yup from 'yup';
 
+import styles from './styles';
+
+const schema = yup.object({
+  email: yup.string().email('Email inválido').required('Obrigatório'),
+  password: yup
+    .string()
+    .min(8, ' A senha deve ter no mínimo 8 caracteres')
+    .required('Obrigatório'),
+});
 
 export default function SignIn() {
   const classes = styles();
 
-
+  const formik = useFormik({
+    initialValues: {
+      email: 'foobar@example.com',
+      password: '',
+    },
+    validationSchema: schema,
+    onSubmit: (values) => {
+      alert(values);
+    },
+  });
   return (
     <Container component="main" maxWidth="xs">
-
       <Paper elevation={4}>
-
         <CssBaseline />
         <div className={classes.root}>
           <Avatar className={classes.avatar}>
@@ -30,59 +46,67 @@ export default function SignIn() {
 
           <Typography component="h1" variant="h4">
             Fazer login
-        </Typography>
-
-          <form className={classes.form} noValidate>
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Seu email"
-              name="email"
-              autoComplete="email"
-
-            />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Senha"
-              type="password"
-              id="password"
-            />
-
-            <div>
-              <Link href='/register'>
-                {`Não tem uma senha? Cadastre agora`}
-              </Link>
-            </div>
-
-            <div>
-
-              <Button className={classes.submit}>
-                Entrar
-              </Button>
-
-            </div>
-
-            <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Esqueceu sua senha?
-              </Link>
-              </Grid>
-              <Grid item>
-              </Grid>
-            </Grid>
-          </form>
+          </Typography>
         </div>
-        <Box mt={8}>
-        </Box>
+
+        <div>
+          <Formik>
+            <form
+              style={{
+                textAlign: 'center',
+              }}
+              onSubmit={formik.handleSubmit}
+            >
+              <TextField
+                className={classes.form}
+                variant="outlined"
+                margin="normal"
+                id="email"
+                label="Seu email"
+                name="email"
+                autoComplete="email"
+                value={formik.values.email}
+                onChange={formik.handleChange}
+                error={formik.touched.email && Boolean(formik.errors.email)}
+                helperText={formik.touched.email && formik.errors.email}
+              />
+              <TextField
+                className={classes.form}
+                variant="outlined"
+                margin="normal"
+                name="password"
+                label="Senha"
+                type="password"
+                id="password"
+                value={formik.values.password}
+                onChange={formik.handleChange}
+                error={
+                  formik.touched.password && Boolean(formik.errors.password)
+                }
+                helperText={formik.touched.password && formik.errors.password}
+              />
+
+              <div
+                style={{
+                  flexDirection: 'row',
+                }}
+              >
+                <Button type="submit" className={classes.submit}>
+                  Entrar
+                </Button>
+
+                <Link to="/register" variant="body2">
+                  Esqueceu sua senha?
+                </Link>
+              </div>
+            </form>
+          </Formik>
+          <div>
+            <Link href="/register">Não tem uma senha? Cadastre agora</Link>
+          </div>
+        </div>
+        <Box mt={8} />
       </Paper>
     </Container>
   );
-} 
+}

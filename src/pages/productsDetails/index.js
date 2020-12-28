@@ -1,12 +1,11 @@
-import Loginfrom from 'pages/login/component/loginfrom';
 import React from 'react';
 import Header from 'shared/component/header';
 
-export default function loginPage() {
+export default function productsDetails() {
   return (
     <div>
       <Header />
-      <Loginfrom />
+      <h1>abc</h1>
     </div>
   );
 }

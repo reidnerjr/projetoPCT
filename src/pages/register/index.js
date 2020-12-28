@@ -11,7 +11,7 @@ import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import { Formik, Field, Form } from 'formik';
+import { Formik, Field, form } from 'formik';
 import React from 'react';
 import * as yup from 'yup';
 
@@ -44,7 +44,7 @@ export default function SignUp() {
       <Container component="main" maxWidth="xs">
         <Header />
 
-        <Paper>
+        <Paper elevation={4}>
           <CssBaseline />
           <div className={classes.root}>
             <Avatar className={classes.avatar}>
