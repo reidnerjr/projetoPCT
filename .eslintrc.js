@@ -4,8 +4,8 @@ module.exports = {
     browser: true,
     es6: true,
   },
-  extends: ['plugin:react/recommended', 'airbnb'],
-  plugins: ['prettier', 'eslint-plugin-import-helpers'],
+  extends: ['plugin:react/recommended'],
+  plugins: ['prettier'],
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
@@ -26,14 +26,6 @@ module.exports = {
       },
     ],
     'comma-dangle': 0,
-    'import-helpers/order-imports': [
-      'warn',
-      {
-        newlinesBetween: 'always',
-        groups: ['module', '/^@shared/', ['parent', 'sibling', 'index']],
-        alphabetize: { order: 'asc', ignoreCase: true },
-      },
-    ],
   },
   settings: {
     'import/resolver': {

@@ -7,29 +7,24 @@ import {
 } from '@material-ui/core';
 import React from 'react';
 import { Link } from 'react-router-dom';
-
+import PropTypes from 'prop-types';
 import useStyles from './styles';
 
-export default function ImgMediaCard() {
+export default function ImgMediaCard({ title, price }) {
   const classes = useStyles();
 
   return (
-    <Card className={classes.root}>
+    <Card>
       <Link to="/productsDetails" variant="body2">
-        <CardActionArea>
+        <CardActionArea className={classes.root}>
           <CardMedia
             component="img"
+            height="120"
             alt="Contemplative Reptile"
-            height="140"
-            image="/static/images/cards/contemplative-reptile.jpg"
-            title="Contemplative Reptile"
+            image="https://reactnative.dev/img/tiny_logo.png"
           />
           <CardContent>
-            <Typography>Celular</Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
-              Smartphone LG G4 Stylus Dual Chip Desbloqueado Android 5.0 5.7\
-              16GB 4G 13MP TiTânio
-            </Typography>
+            <Typography>{title}</Typography>
           </CardContent>
         </CardActionArea>
       </Link>
@@ -39,17 +34,18 @@ export default function ImgMediaCard() {
           marginLeft: 10,
         }}
       >
-        <Typography size="small" color="primary">
-          10x de R$ 129,99
-          <p
-            style={{
-              fontSize: 13,
-            }}
-          >
-            no cartão de crédito sem juros ou R$ 1.299,99 à vista
-          </p>
-        </Typography>
+        <Typography> R$ {price}</Typography>
       </div>
     </Card>
   );
 }
+
+ImgMediaCard.propTypes = {
+  title: PropTypes.string,
+  price: PropTypes.string,
+};
+
+ImgMediaCard.defaultProps = {
+  title: '',
+  price: '',
+};
