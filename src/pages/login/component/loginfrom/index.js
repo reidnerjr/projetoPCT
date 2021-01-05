@@ -27,7 +27,7 @@ export default function SignIn() {
 
   const formik = useFormik({
     initialValues: {
-      email: 'foobar@example.com',
+      email: '',
       password: '',
     },
     validationSchema: schema,
@@ -86,18 +86,13 @@ export default function SignIn() {
                 helperText={formik.touched.password && formik.errors.password}
               />
 
-              <div
-                style={{
-                  flexDirection: 'row',
-                }}
-              >
-                <Button type="submit" className={classes.submit}>
-                  Entrar
-                </Button>
-
+              <div className={classes.containerButton}>
                 <Link to="/register" variant="body2">
                   Esqueceu sua senha?
                 </Link>
+                <Button type="submit" className={classes.submit}>
+                  Entrar
+                </Button>
               </div>
             </form>
           </Formik>

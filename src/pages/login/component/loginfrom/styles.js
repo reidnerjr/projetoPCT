@@ -21,10 +21,15 @@ const styles = makeStyles(() => ({
     transform: '1.1',
     type: 'submit',
     width: 100,
-    display: 'flex',
-    flex: 1,
-    alignSelf: 'flex-end',
     color: 'white',
+  },
+  containerButton: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginLeft: '5%',
+    marginRight: '5%',
   },
 }));
 

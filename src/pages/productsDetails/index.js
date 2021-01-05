@@ -1,18 +1,27 @@
-import { Typography } from '@material-ui/core';
 import React from 'react';
 import Header from 'shared/component/header';
-
 import styles from './styles';
 
-export default function productsDetails() {
+function productsDetails() {
   const classes = styles();
 
   return (
     <div className={classes.container}>
       <Header />
-      <div className={classes.card}>
-        <Typography>{}</Typography>
+      <div>
+        {/* <Container>
+          <Panel>
+            <Column>
+              <Info />
+            </Column>
+
+            <Column></Column>
+          </Panel>
+        </Container> */}
       </div>
     </div>
   );
 }
+// const Info = () => <Description></Description>;
+
+export default productsDetails;

@@ -30,7 +30,11 @@ export default function HomePage() {
         <Grid container justify="center" spacing={4}>
           {products.map((value) => (
             <Grid key={value} item>
-              <Card title={value.title} price={value.price} />
+              <Card
+                title={value.title}
+                price={value.price}
+                picture={value.picture}
+              />
             </Grid>
           ))}
         </Grid>

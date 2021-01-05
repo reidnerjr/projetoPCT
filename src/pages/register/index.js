@@ -11,7 +11,7 @@ import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import { Formik, Field, form } from 'formik';
+import { Formik } from 'formik';
 import React from 'react';
 import * as yup from 'yup';
 
