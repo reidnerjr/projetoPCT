@@ -8,11 +8,11 @@ const styles = makeStyles(() => ({
     alignItems: 'center',
   },
   avatar: {
-    margin: 3,
+    marginTop: 2,
     backgroundColor: 'rgb(190, 15, 52)',
   },
   form: {
-    width: '95%',
+    width: '90%',
     marginTop: 20,
   },
   submit: {
@@ -21,8 +21,15 @@ const styles = makeStyles(() => ({
     transform: '1.1',
     type: 'submit',
     width: 100,
-    marginTop: 10,
     color: 'white',
+  },
+  containerButton: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginLeft: '5%',
+    marginRight: '5%',
   },
 }));
 

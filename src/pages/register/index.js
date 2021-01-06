@@ -12,33 +12,37 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { Formik } from 'formik';
+import InputMask from 'react-input-mask';
 import React from 'react';
 import * as yup from 'yup';
 
 import Header from '../../shared/component/header';
 import styles from './styles';
 
-const validationSchema = yup.object({
+const schema = yup.object({
   email: yup
-    .string('Enter your email')
+    .string()
     .email('Enter a valid email')
 
     .required('Email is required'),
   password: yup
-    .string('Enter your password')
+    .string()
     .min(8, 'Password should be of minimum 8 characters length')
     .required('Password is required'),
+  cep: Yup.string().required('campo obrigatório'),
 });
 export default function SignUp() {
   const classes = styles();
 
   return (
     <Formik
-      validationSchema={validationSchema}
+      validationSchema={schema}
       initialValues={{
         firstName: '',
         lastName: '',
         email: '',
+        password: '',
+        cpf: '',
       }}
     >
       <Container component="main" maxWidth="xs">
@@ -52,7 +56,7 @@ export default function SignUp() {
             </Avatar>
 
             <Typography component="h1" variant="h5">
-              Cadastrar
+              Preencha seus dados
             </Typography>
 
             <form className={classes.form} noValidate>
@@ -111,50 +115,36 @@ export default function SignUp() {
                     fullWidth
                     name="cpf"
                     label="CPF"
+                    mask="999.999.999-99"
                     type="cpf"
                     id="cpf"
                     autoComplete="current-cpf"
                   />
                 </Grid>
-
-                <Grid item xs={12}>
-                  <TextField
-                    variant="outlined"
-                    required
-                    fullWidth
-                    name="password"
-                    label="Senha"
-                    type="Password"
-                    id="password"
-                    autoComplete="current-number"
-                  />
-                </Grid>
-
-                <Grid item xs={12}>
-                  <FormControlLabel
-                    control={
-                      <Checkbox value="allowExtraEmails" color="primary" />
-                    }
-                    label=" Eu deseja receber inspiração, promoções de marketing e atualizações por e-mail."
-                  />
-                </Grid>
               </Grid>
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                color="primary"
-                className={classes.submit}
-              >
-                Entrar
-              </Button>
-              <Grid container justify="flex-end">
-                <Grid item>
-                  <Link href="/login" variant="body2">
-                    já tem uma conta? entrar
-                  </Link>
-                </Grid>
+
+              <Grid item xs={12}>
+                <FormControlLabel
+                  control={
+                    <Checkbox value="allowExtraEmails" color="primary" />
+                  }
+                  label=" Aceito os Termos e condições e autorizo o uso de meus dados de acordo com a Declaração de privacidade."
+                />
               </Grid>
+
+              <div className={classes.containerButton}>
+                <Button type="submit" className={classes.submit}>
+                  Entrar
+                </Button>
+
+                <Grid container justify="flex-end">
+                  <Grid item>
+                    <Link href="/login" variant="body2">
+                      já tem uma conta? entrar
+                    </Link>
+                  </Grid>
+                </Grid>
+              </div>
             </form>
           </div>
           <Box mt={5} />
