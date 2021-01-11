@@ -1,10 +1,10 @@
 import Grid from '@material-ui/core/Grid';
 import React, { useEffect, useState } from 'react';
 import api from 'services/api';
+import { Link } from 'react-router-dom';
 import Card from 'shared/component/card';
 import Footer from 'shared/component/footer';
 import Header from 'shared/component/header';
-
 import styles from './styles';
 
 export default function HomePage() {
@@ -30,11 +30,18 @@ export default function HomePage() {
         <Grid container justify="center" spacing={4}>
           {products.map((value) => (
             <Grid key={value} item>
-              <Card
-                title={value.title}
-                price={value.price}
-                picture={value.picture}
-              />
+              <Link
+                to={`/productsDetails/${value.id}`}
+                style={{
+                  textDecoration: 'none',
+                }}
+              >
+                <Card
+                  title={value.title}
+                  price={value.price}
+                  picture={value.picture}
+                />
+              </Link>
             </Grid>
           ))}
         </Grid>

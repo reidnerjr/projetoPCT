@@ -12,7 +12,6 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { Formik } from 'formik';
-import InputMask from 'react-input-mask';
 import React from 'react';
 import * as yup from 'yup';
 
@@ -29,7 +28,6 @@ const schema = yup.object({
     .string()
     .min(8, 'Password should be of minimum 8 characters length')
     .required('Password is required'),
-  cep: Yup.string().required('campo obrigatório'),
 });
 export default function SignUp() {
   const classes = styles();

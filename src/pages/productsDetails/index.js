@@ -8,20 +8,9 @@ function productsDetails() {
   return (
     <div className={classes.container}>
       <Header />
-      <div>
-        {/* <Container>
-          <Panel>
-            <Column>
-              <Info />
-            </Column>
-
-            <Column></Column>
-          </Panel>
-        </Container> */}
-      </div>
+      <div>produto</div>
     </div>
   );
 }
-// const Info = () => <Description></Description>;
 
 export default productsDetails;

@@ -21,6 +21,12 @@ const useStyles = makeStyles(() => ({
     display: 'flex',
     alignItems: 'center',
   },
+  search: {
+    backgroundColor: 'white',
+    width: 500,
+    borderRadius: '5px',
+    marginBottom: 10,
+  },
 }));
 
 export default useStyles;

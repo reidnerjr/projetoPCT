@@ -29,7 +29,21 @@ function shopcart() {
           <Grid item xs={12} sm={6}></Grid>
           <h1>daada</h1>
           <Grid item xs={6} sm={3}>
-            <Paper className={classes.paper}>xs</Paper>
+            <div className={classes.card}>
+              <h3>Entrega</h3>
+
+              <Button className={classes.buttonFinish}>Finalizar compra</Button>
+              <Link
+                to="/"
+                style={{
+                  textDecoration: 'none',
+                }}
+              >
+                <Button className={classes.buttonBack}>
+                  Continuar comprando
+                </Button>
+              </Link>
+            </div>
           </Grid>
         </Grid>
       </div>

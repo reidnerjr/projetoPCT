@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-const styles = makeStyles((theme) => ({
+const styles = makeStyles(() => ({
   header: {
     backgroundColor: 'white',
     justifyContent: 'center',
@@ -16,9 +16,29 @@ const styles = makeStyles((theme) => ({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  paper: {
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
+  card: {
+    border: '1px solid #000',
+    width: 300,
+    height: 350,
+    background: 'white',
+    alignItems: 'center',
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  buttonFinish: {
+    backgroundColor: 'orange',
+    borderRadius: '10px',
+    height: 55,
+    width: '70%',
+    color: 'black',
+    marginBottom: 20,
+  },
+  buttonBack: {
+    backgroundColor: 'black',
+    borderRadius: '10px',
+    height: 50,
+    width: '50',
+    color: 'white',
   },
 }));
 
