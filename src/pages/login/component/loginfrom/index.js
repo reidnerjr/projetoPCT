@@ -9,6 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { useFormik, Formik } from 'formik';
 import React from 'react';
+import api from 'services/api';
 import { Link } from 'react-router-dom';
 import * as yup from 'yup';
 
@@ -25,15 +26,21 @@ const schema = yup.object({
 export default function SignIn() {
   const classes = styles();
 
+  const getData = async ({ email, password }) => {
+    const response = await api.get('/user', {
+      email,
+      password,
+    });
+    console.log(response);
+    return response;
+  };
   const formik = useFormik({
     initialValues: {
       email: 'exemplo@email.com',
       password: '',
     },
     validationSchema: schema,
-    onSubmit: (values) => {
-      alert(values);
-    },
+    onSubmit: getData,
   });
   return (
     <Container component="main" maxWidth="xs">
@@ -97,7 +104,7 @@ export default function SignIn() {
             </form>
           </Formik>
           <div>
-            <Link href="/register">Não tem uma senha? Cadastre agora</Link>
+            <Link to="/register">Não tem uma senha? Cadastre agora</Link>
           </div>
         </div>
         <Box mt={8} />

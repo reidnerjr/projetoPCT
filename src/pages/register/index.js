@@ -11,10 +11,10 @@ import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import { Formik } from 'formik';
+import { Formik, useFormik } from 'formik';
+import api from 'services/api';
 import React from 'react';
 import * as yup from 'yup';
-
 import Header from '../../shared/component/header';
 import styles from './styles';
 
@@ -32,6 +32,25 @@ const schema = yup.object({
 export default function SignUp() {
   const classes = styles();
 
+  const getData = async ({ email, password, firstName, lastName, cpf }) => {
+    const response = await api.post('/user', {
+      email,
+      password,
+      firstName,
+      lastName,
+      cpf,
+    });
+    console.log(response);
+    return response;
+  };
+  const formik = useFormik({
+    initialValues: {
+      email: 'exemplo@email.com',
+      password: '',
+    },
+    validationSchema: schema,
+    onSubmit: getData,
+  });
   return (
     <Formik
       validationSchema={schema}
@@ -66,7 +85,7 @@ export default function SignUp() {
                     variant="outlined"
                     required
                     fullWidth
-                    id="First"
+                    id="firstName"
                     label="Nome"
                     autoFocus
                   />
@@ -91,6 +110,10 @@ export default function SignUp() {
                     label="Email"
                     name="email"
                     autoComplete="email"
+                    value={formik.values.email}
+                    onChange={formik.handleChange}
+                    error={formik.touched.email && Boolean(formik.errors.email)}
+                    helperText={formik.touched.email && formik.errors.email}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -103,6 +126,14 @@ export default function SignUp() {
                     type="Password"
                     id="password"
                     autoComplete="current-password"
+                    value={formik.values.password}
+                    onChange={formik.handleChange}
+                    error={
+                      formik.touched.password && Boolean(formik.errors.password)
+                    }
+                    helperText={
+                      formik.touched.password && formik.errors.password
+                    }
                   />
                 </Grid>
 

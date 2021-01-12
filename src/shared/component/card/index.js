@@ -26,7 +26,7 @@ export default function ImgMediaCard({ title, price, picture }) {
             textDecoration: 'none',
             color: 'black',
           }}
-          to="/productsDetails"
+          to="/productsDetails/:id/"
         >
           <CardActionArea className={classes.root}>
             <CardMedia

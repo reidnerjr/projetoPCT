@@ -10,7 +10,7 @@ const styles = makeStyles(() => ({
     paddingTop: '3%',
     marginLeft: '10%',
     marginRight: '10%',
-    background: '#DCDCDC',
+    background: '#F5F5F5',
   },
   grid: {
     justifyContent: 'center',
@@ -20,7 +20,7 @@ const styles = makeStyles(() => ({
     border: '1px solid #000',
     width: 300,
     height: 350,
-    background: 'white',
+    background: '#FFFAFA;',
     alignItems: 'center',
     display: 'flex',
     flexDirection: 'column',
@@ -28,8 +28,8 @@ const styles = makeStyles(() => ({
   buttonFinish: {
     backgroundColor: 'orange',
     borderRadius: '10px',
-    height: 55,
-    width: '70%',
+    height: 60,
+    width: '100%',
     color: 'black',
     marginBottom: 20,
   },
@@ -39,6 +39,12 @@ const styles = makeStyles(() => ({
     height: 50,
     width: '50',
     color: 'white',
+  },
+  propsBar: {
+    flexDirection: 'row',
+    display: 'flex',
+    flex: 1,
+    padding: 8,
   },
 }));
 

@@ -11,7 +11,7 @@ export default function ClassesNesting() {
   return (
     <div className={classes.fixarRodape}>
       <div className={classes.root}>
-        <h1>Loja de celulares</h1>
+        <h1>Store Phone</h1>
 
         <Link
           href="https://www.instagram.com/reactjsofficial/"

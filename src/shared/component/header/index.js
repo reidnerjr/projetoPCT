@@ -43,7 +43,7 @@ const Header = () => {
               }}
             >
               <Button className={classes.style}>
-                <h1>Loja de celulares </h1>
+                <h1>Store Phone</h1>
               </Button>
             </Link>
           </div>
