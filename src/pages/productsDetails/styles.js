@@ -1,5 +1,4 @@
 import { makeStyles } from '@material-ui/core/styles';
-// import style from 'styled-'
 const styles = makeStyles(() => ({
   media: {
     height: 100,
@@ -13,11 +12,7 @@ const styles = makeStyles(() => ({
   title: {
     fontSize: '16px',
     color: 'black',
-  },
-  noProdMessage: {
-    fontSize: '50px',
-    color: '#000080',
-    fontWeight: 'bold',
+    font: 'bold',
   },
 }));
 export default styles;

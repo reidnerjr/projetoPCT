@@ -6,7 +6,6 @@ import {
   CardContent,
 } from '@material-ui/core';
 import React from 'react';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import useStyles from './styles';
 import Paper from '@material-ui/core/Paper';
@@ -21,25 +20,17 @@ export default function ImgMediaCard({ title, price, picture }) {
           height: 400,
         }}
       >
-        <Link
-          style={{
-            textDecoration: 'none',
-            color: 'black',
-          }}
-          to="/productsDetails/:id/"
-        >
-          <CardActionArea className={classes.root}>
-            <CardMedia
-              className={classes.midia}
-              component="img"
-              alt="cellphone"
-              image={picture}
-            />
-            <CardContent>
-              <Typography>{title}</Typography>
-            </CardContent>
-          </CardActionArea>
-        </Link>
+        <CardActionArea className={classes.root}>
+          <CardMedia
+            className={classes.midia}
+            component="img"
+            alt="cellphone"
+            image={picture}
+          />
+          <CardContent>
+            <Typography>{title}</Typography>
+          </CardContent>
+        </CardActionArea>
 
         <div
           style={{
