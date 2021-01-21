@@ -1,14 +1,33 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 import styles from './styles';
-import Grid from '@material-ui/core/Grid';
+import CartHook from 'hook';
+
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
 import { Link } from 'react-router-dom';
-// import Divider from '@material-ui/core/Divider';
-import { Typography } from '@material-ui/core';
+import { Card, CardMedia, Typography, CardContent } from '@material-ui/core';
+import Divider from '@material-ui/core/Divider';
+import api from 'services/api';
 
 function shopcart() {
   const classes = styles();
+  const { Delete } = CartHook();
+  const deletar = (id) => {
+    Delete(id);
+    getData();
+  };
+  const [products, setProducts] = useState([]);
+  const getData = async () => {
+    const response = await api.get('/cart');
+    const data = await response.data;
+    setProducts(data);
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
   return (
     <div>
       <Toolbar className={classes.header}>
@@ -19,54 +38,168 @@ function shopcart() {
               textDecoration: 'none',
             }}
           >
-            <Button className={classes.style}>
+            <Button>
               <h1>Store Phone</h1>
             </Button>
           </Link>
         </div>
       </Toolbar>
-      <div className={classes.root}>
-        <Grid container spacing={5} className={classes.grid}>
-          <Grid item xs={12} sm={6}></Grid>
-          <div className={classes.propsBar}>
+      <div className={classes.container}>
+        <div className={classes.root}>
+          {products && products.length > 0 && (
+            <>
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                }}
+              >
+                <Typography
+                  style={{
+                    marginLeft: 15,
+                    marginRight: 70,
+                    fontWeight: 30,
+                  }}
+                >
+                  Produto
+                </Typography>
+                <Typography
+                  style={{
+                    marginLeft: 15,
+                    marginRight: 170,
+                  }}
+                >
+                  Nome
+                </Typography>
+                <Typography>Preço</Typography>
+              </div>
+              <Divider
+                style={{
+                  height: 3,
+                  backgroundColor: 'black',
+                  width: 700,
+                }}
+              />
+            </>
+          )}
+          {products &&
+            products.length > 0 &&
+            products.map((product) => {
+              return (
+                <div key={product.id}>
+                  <Card className={classes.prodcard}>
+                    <CardMedia
+                      className={classes.midia}
+                      component="img"
+                      alt="cellphone"
+                      image={product.picture}
+                    />
+                    <CardContent>
+                      <Typography
+                        style={{
+                          width: 210,
+                          fontSize: 13,
+                          justifyContent: 'center',
+                        }}
+                      >
+                        {product.title}
+                      </Typography>
+                    </CardContent>
+                    <Typography
+                      style={{
+                        alignSelf: 'center',
+                        marginLeft: 10,
+                      }}
+                    >
+                      R${product.price},00
+                    </Typography>
+
+                    <div
+                      style={{
+                        alignSelf: 'center',
+                        marginLeft: 10,
+                      }}
+                    >
+                      <IconButton>
+                        <DeleteIcon onClick={() => deletar(product.id)} />
+                      </IconButton>
+                    </div>
+                  </Card>
+                </div>
+              );
+            })}
+        </div>
+        {products && products.length === 0 && (
+          <div className={classes.void}>
             <Typography
               style={{
-                textAlign: 'center',
+                fontSize: 45,
               }}
             >
-              Produto
+              Seu carrinho está vazio.
             </Typography>
-            <Typography>Preço</Typography>
-            <Typography>Quantidade</Typography>
-            <Typography>Total</Typography>
+            <Typography
+              style={{
+                fontSize: 20,
+              }}
+            >
+              Para continuar comprando, navegue pelas categorias do site ou faça
+              uma busca pelo seu produto.
+            </Typography>
+            <Link to="/" style={{ textDecoration: 'none' }}>
+              <Button
+                style={{
+                  background: '#5bb75b',
+                  color: 'white',
+                  borderRadius: '8px',
+                  marginBottom: 50,
+                  marginTop: 50,
+                }}
+              >
+                escolher produtos
+              </Button>
+            </Link>
           </div>
-          {/* <Divider variant="fullWidth" orientation="horizontal" /> */}
-          <Grid item xs={6} sm={3}>
-            <div className={classes.card}>
-              <h3>Entrega</h3>
-              <Link
-                to="/checkout"
-                style={{
-                  textDecoration: 'none',
-                }}
-              >
-                <Button className={classes.buttonFinish}>
-                  Finalizar compra
-                </Button>
-              </Link>
-              <Link
-                to="/"
-                style={{
-                  textDecoration: 'none',
-                }}
-              >
-                <Button className={classes.buttonBack}>
-                  Continuar comprando
-                </Button>
-              </Link>
+        )}
+        {products && products.length > 0 && (
+          <div className={classes.card}>
+            <Typography
+              style={{
+                fontSize: 20,
+              }}
+            >
+              Entrega
+            </Typography>
+            <div
+              style={{
+                margin: 30,
+                fontSize: 20,
+                display: 'flex',
+                justifyContent: 'center',
+              }}
+            >
+              {/* Total R$ {product.price} */}
             </div>
-          </Grid>
-        </Grid>
+            <Link
+              to="/checkout"
+              style={{
+                textDecoration: 'none',
+              }}
+            >
+              <Button className={classes.buttonFinish}>Finalizar compra</Button>
+            </Link>
+            <Link
+              to="/"
+              style={{
+                textDecoration: 'none',
+              }}
+            >
+              <Button className={classes.buttonBack}>
+                Continuar comprando
+              </Button>
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   );

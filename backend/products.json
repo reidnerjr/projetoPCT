@@ -36,7 +36,7 @@
     {
       "id": 133453170,
       "title": "Smartphone Samsung Galaxy S20 Azul 128GB, 8GB RAM, Tela Infinita de 6.2'', Câmera Tripla Traseira, Câmera Frontal 10MP, ",
-      "price": 2199,
+      "price": 2.199,
       "picture": "https://images-submarino.b2w.io/produtos/01/00/item/133342/7/133342709_1GG.jpg",
       "description": "Conheça o Moto Z² Play. Com 5.99 mm de espessura, ele é leve, rápido, e se transforma naquilo que você mais precisa em apenas um click com os Moto Snaps™. Fique o dia todo com um único carregamento. Esqueceu de fazer isso à noite? Sem problema. Tenha até 6 horas de uso em apenas 15 minutos com o carregador TurboPower™. Tire fotos nítidas durante o dia ou à noite com uma câmera que combina tecnologia Dual Autofocus Pixel e foco a laser. Depois, mostre os resultados em uma incrível tela AMOLED Full HD de 5,5 polegadas. Tudo isso em uma estrutura única em metal.",
       "memory": "64GB",
@@ -92,8 +92,67 @@
   "user": [
     {
       "email": "exemplo@email.com",
-      "password": "1442453453453453",
+      "password": "azsasdasdasdasd",
+      "firstName": "reidner",
+      "cpf": "648.645.645-64",
       "id": 1
+    },
+    {
+      "email": "exemplo@email.com",
+      "password": "azsasdasdasdasd",
+      "firstName": "reidner",
+      "cpf": "648.645.645-64",
+      "id": 2
+    },
+    {
+      "email": "exemplo@email.com",
+      "password": "adasdasdasdas",
+      "firstName": "",
+      "cpf": "",
+      "id": 3
+    },
+    {
+      "email": "exemplo@email.com",
+      "password": "adasdasdasdas",
+      "firstName": "",
+      "cpf": "",
+      "id": 4
+    },
+    {
+      "email": "exemplo@email.com",
+      "password": "adasdasdasdas",
+      "firstName": "",
+      "cpf": "",
+      "id": 5
+    },
+    {
+      "email": "exemplo@email.com",
+      "password": "adasdasdasdas",
+      "firstName": "",
+      "cpf": "",
+      "id": 6
+    },
+    {
+      "email": "exemplo@email.com",
+      "password": "fdasfsafsadf",
+      "firstName": "",
+      "cpf": "",
+      "id": 7
+    },
+    {
+      "email": "exemplo@email.com",
+      "password": "fdasfsafsadf",
+      "firstName": "reidner",
+      "cpf": "645.645.645-64",
+      "id": 8
+    },
+    {
+      "email": "exemplo@email.com",
+      "password": "sdasdasdasd",
+      "firstName": "",
+      "cpf": "",
+      "id": 9
     }
-  ]
+  ],
+  "cart": []
 }

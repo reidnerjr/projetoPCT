@@ -12,17 +12,21 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { Formik, useFormik } from 'formik';
+import { useHistory } from 'react-router-dom';
 import api from 'services/api';
-import React from 'react';
+import React, { useState } from 'react';
 import * as yup from 'yup';
 import Header from '../../shared/component/header';
 import styles from './styles';
+import InputMask from 'react-input-mask';
+import Modal from '@material-ui/core/Modal';
+import Backdrop from '@material-ui/core/Backdrop';
+import Fade from '@material-ui/core/Fade';
 
 const schema = yup.object({
   email: yup
     .string()
     .email('Enter a valid email')
-
     .required('Email is required'),
   password: yup
     .string()
@@ -31,37 +35,38 @@ const schema = yup.object({
 });
 export default function SignUp() {
   const classes = styles();
+  const history = useHistory();
+  const [register, setRegister] = useState(false);
+  const handleClose = () => {
+    setRegister(false);
+    history.push('/');
+  };
 
-  const getData = async ({ email, password, firstName, lastName, cpf }) => {
+  const getData = async ({ email, password, firstName, cpf }) => {
     const response = await api.post('/user', {
       email,
       password,
       firstName,
-      lastName,
       cpf,
     });
-    console.log(response);
+    if (response.status === 200 || response.status === 201) {
+      return setRegister(true);
+    }
+    console.log(register);
     return response;
   };
   const formik = useFormik({
     initialValues: {
       email: 'exemplo@email.com',
       password: '',
+      firstName: '',
+      cpf: '',
     },
     validationSchema: schema,
     onSubmit: getData,
   });
   return (
-    <Formik
-      validationSchema={schema}
-      initialValues={{
-        firstName: '',
-        lastName: '',
-        email: '',
-        password: '',
-        cpf: '',
-      }}
-    >
+    <Formik>
       <Container component="main" maxWidth="xs">
         <Header />
 
@@ -76,7 +81,11 @@ export default function SignUp() {
               Preencha seus dados
             </Typography>
 
-            <form className={classes.form} noValidate>
+            <form
+              className={classes.form}
+              noValidate
+              onSubmit={formik.handleSubmit}
+            >
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
                   <TextField
@@ -88,6 +97,15 @@ export default function SignUp() {
                     id="firstName"
                     label="Nome"
                     autoFocus
+                    value={formik.values.firstName}
+                    onChange={formik.handleChange}
+                    error={
+                      formik.touched.firstName &&
+                      Boolean(formik.errors.firstName)
+                    }
+                    helperText={
+                      formik.touched.firstName && formik.errors.firstName
+                    }
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -138,16 +156,19 @@ export default function SignUp() {
                 </Grid>
 
                 <Grid item xs={12}>
-                  <TextField
-                    variant="outlined"
+                  <InputMask
+                    className={classes.input}
                     required
-                    fullWidth
                     name="cpf"
-                    label="CPF"
+                    placeholder="CPF*"
                     mask="999.999.999-99"
                     type="cpf"
                     id="cpf"
                     autoComplete="current-cpf"
+                    value={formik.values.cpf}
+                    onChange={formik.handleChange}
+                    error={formik.touched.cpf && Boolean(formik.errors.cpf)}
+                    helperText={formik.touched.cpf && formik.errors.passwocpfrd}
                   />
                 </Grid>
               </Grid>
@@ -163,8 +184,31 @@ export default function SignUp() {
 
               <div className={classes.containerButton}>
                 <Button type="submit" className={classes.submit}>
-                  Entrar
+                  Registrar
                 </Button>
+                {register && (
+                  <Modal
+                    aria-labelledby="transition-modal-title"
+                    aria-describedby="transition-modal-description"
+                    className={classes.modal}
+                    open={register}
+                    onClose={handleClose}
+                    closeAfterTransition
+                    BackdropComponent={Backdrop}
+                    BackdropProps={{
+                      timeout: 500,
+                    }}
+                  >
+                    <Fade in={open}>
+                      <div className={classes.paper}>
+                        <h2 id="transition-modal-title">Parabéns</h2>
+                        <p id="transition-modal-description">
+                          Registrado com sucesso
+                        </p>
+                      </div>
+                    </Fade>
+                  </Modal>
+                )}
 
                 <Grid container justify="flex-end">
                   <Grid item>

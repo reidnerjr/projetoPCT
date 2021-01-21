@@ -15,7 +15,7 @@ const Header = () => {
   const classes = useStyles();
   const [products, setProducts] = useState([]);
 
-  const getFF = async (id) => {
+  const getProducts = async (id) => {
     const response = await api.get(`/products/${id}`);
     const data = await response.data;
     setProducts(data);
@@ -52,13 +52,13 @@ const Header = () => {
               <Autocomplete
                 freeSolo
                 id="free-solo-2-demo"
-                onChange={getFF}
+                onChange={getProducts}
                 disableClearable
-                options={
+                options={[
                   products &&
-                  products.length > 0 &&
-                  products.map((value) => value.title)
-                }
+                    products.length > 0 &&
+                    products.map((value) => value.title),
+                ]}
                 renderInput={(params) => (
                   <TextField
                     className={classes.search}
@@ -96,7 +96,7 @@ const Header = () => {
               <Button className={classes.style}>cadastra-se</Button>
             </Link>
             <Link
-              to="/shopcart/:id/"
+              to="/shopcart"
               style={{
                 textDecoration: 'none',
               }}

@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-const styles = makeStyles(() => ({
+const styles = makeStyles((theme) => ({
   root: {
     marginTop: 100,
     display: 'flex',
@@ -30,6 +30,17 @@ const styles = makeStyles(() => ({
     justifyContent: 'space-between',
     marginLeft: '5%',
     marginRight: '5%',
+  },
+  modal: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  paper: {
+    backgroundColor: 'white',
+    border: '2px solid #000',
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
   },
 }));
 

@@ -14,7 +14,7 @@ function Routes() {
       <Switch>
         <Route path="/" exact component={Home} />
         <Route path="/login" component={Login} />
-        <Route path="/shopcart/:id/" component={Shopcart} />
+        <Route path="/shopcart" component={Shopcart} />
         <Route path="/register" component={Register} />
         <Route path="/productsDetails/:id/" component={ProductsDetails} />
         <Route path="/checkout" component={Checkout} />

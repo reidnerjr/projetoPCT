@@ -8,12 +8,15 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { useFormik, Formik } from 'formik';
-import React from 'react';
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import api from 'services/api';
 import { Link } from 'react-router-dom';
 import * as yup from 'yup';
-
 import styles from './styles';
+import Modal from '@material-ui/core/Modal';
+import Backdrop from '@material-ui/core/Backdrop';
+import Fade from '@material-ui/core/Fade';
 
 const schema = yup.object({
   email: yup.string().email('Email inválido').required('Obrigatório'),
@@ -25,13 +28,54 @@ const schema = yup.object({
 
 export default function SignIn() {
   const classes = styles();
-
+  const history = useHistory();
+  const [state, setState] = useState({
+    empty: false,
+    loged: false,
+    error: false,
+  });
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+    history.push('/');
+  };
+  const handleError = () => {
+    setOpen(false);
+  };
   const getData = async ({ email, password }) => {
     const response = await api.get('/user', {
       email,
       password,
     });
-    console.log(response);
+    if (response.data.length === 0) {
+      setState({
+        ...state,
+        empty: true,
+      });
+    }
+    if (
+      response.data.length > 0 &&
+      response.data.email[0] === email &&
+      response.data.password[0] === password
+    ) {
+      setState({
+        ...state,
+        loged: true,
+      });
+    }
+    if (
+      response.data.length > 0 &&
+      response.data.email[0] !== email &&
+      response.data.password[0] !== password
+    ) {
+      setState({
+        ...state,
+        error: true,
+      });
+    }
     return response;
   };
   const formik = useFormik({
@@ -97,9 +141,36 @@ export default function SignIn() {
                 <Link to="/register" variant="body2">
                   Esqueceu sua senha?
                 </Link>
-                <Button type="submit" className={classes.submit}>
+                <Button
+                  type="button"
+                  onClick={handleOpen}
+                  className={classes.submit}
+                >
                   Entrar
                 </Button>
+                {open && (
+                  <Modal
+                    aria-labelledby="transition-modal-title"
+                    aria-describedby="transition-modal-description"
+                    className={classes.modal}
+                    open={open}
+                    onClose={handleClose}
+                    closeAfterTransition
+                    BackdropComponent={Backdrop}
+                    BackdropProps={{
+                      timeout: 500,
+                    }}
+                  >
+                    <Fade in={open}>
+                      <div className={classes.paper}>
+                        <h2 id="transition-modal-title">ATENÇÃO</h2>
+                        <p id="transition-modal-description">
+                          tentativa de login inválida
+                        </p>
+                      </div>
+                    </Fade>
+                  </Modal>
+                )}
               </div>
             </form>
           </Formik>
@@ -107,6 +178,9 @@ export default function SignIn() {
             <Link to="/register">Não tem uma senha? Cadastre agora</Link>
           </div>
         </div>
+        {state.empty && <span>usuário não encontrado</span>}
+        {state.loged && <span>logado com sucesso</span>}
+        {state.error && <span>senha ou email errado</span>}
         <Box mt={8} />
       </Paper>
     </Container>
