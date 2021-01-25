@@ -40,7 +40,7 @@ const styles = makeStyles((theme) => ({
     borderRadius: '30px',
     transform: '1.1',
     type: 'submit',
-    width: 100,
+    width: 130,
     color: 'white',
     marginTop: 12,
     marginBottom: 12,

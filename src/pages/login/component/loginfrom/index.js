@@ -30,7 +30,6 @@ export default function SignIn() {
   const classes = styles();
   const history = useHistory();
   const [state, setState] = useState({
-    empty: false,
     loged: false,
     error: false,
   });
@@ -42,40 +41,30 @@ export default function SignIn() {
     setOpen(false);
     history.push('/');
   };
-  const handleError = () => {
-    setOpen(false);
-  };
+
   const getData = async ({ email, password }) => {
     const response = await api.get('/user', {
       email,
       password,
     });
+
     if (response.data.length === 0) {
       setState({
-        ...state,
-        empty: true,
-      });
-    }
-    if (
-      response.data.length > 0 &&
-      response.data.email[0] === email &&
-      response.data.password[0] === password
-    ) {
-      setState({
-        ...state,
-        loged: true,
-      });
-    }
-    if (
-      response.data.length > 0 &&
-      response.data.email[0] !== email &&
-      response.data.password[0] !== password
-    ) {
-      setState({
-        ...state,
+        loged: false,
         error: true,
       });
     }
+    if (
+      response.data.length > 0 &&
+      response.data[0].email === email &&
+      response.data[0].password === password
+    ) {
+      setState({
+        loged: true,
+        error: false,
+      });
+    }
+    console.log(response);
     return response;
   };
   const formik = useFormik({
@@ -142,47 +131,54 @@ export default function SignIn() {
                   Esqueceu sua senha?
                 </Link>
                 <Button
-                  type="button"
+                  type="submit"
                   onClick={handleOpen}
                   className={classes.submit}
                 >
                   Entrar
                 </Button>
-                {open && (
-                  <Modal
-                    aria-labelledby="transition-modal-title"
-                    aria-describedby="transition-modal-description"
-                    className={classes.modal}
-                    open={open}
-                    onClose={handleClose}
-                    closeAfterTransition
-                    BackdropComponent={Backdrop}
-                    BackdropProps={{
-                      timeout: 500,
-                    }}
-                  >
-                    <Fade in={open}>
-                      <div className={classes.paper}>
-                        <h2 id="transition-modal-title">ATENÇÃO</h2>
-                        <p id="transition-modal-description">
-                          tentativa de login inválida
-                        </p>
-                      </div>
-                    </Fade>
-                  </Modal>
-                )}
               </div>
             </form>
           </Formik>
-          <div>
+          <div
+            style={{
+              marginLeft: 20,
+            }}
+          >
             <Link to="/register">Não tem uma senha? Cadastre agora</Link>
           </div>
         </div>
-        {state.empty && <span>usuário não encontrado</span>}
-        {state.loged && <span>logado com sucesso</span>}
-        {state.error && <span>senha ou email errado</span>}
         <Box mt={8} />
       </Paper>
+      <div
+        style={{
+          margin: 20,
+          fontSize: 30,
+        }}
+      >
+        {state.error && <span>usuário não encontrado</span>}
+        {state.loged && (
+          <Modal
+            aria-labelledby="transition-modal-title"
+            aria-describedby="transition-modal-description"
+            className={classes.modal}
+            open={open}
+            onClose={handleClose}
+            closeAfterTransition
+            BackdropComponent={Backdrop}
+            BackdropProps={{
+              timeout: 500,
+            }}
+          >
+            <Fade in={open}>
+              <div className={classes.paper}>
+                <h2 id="transition-modal-title">Parabens</h2>
+                <p id="transition-modal-description">logado com sucesso</p>
+              </div>
+            </Fade>
+          </Modal>
+        )}
+      </div>
     </Container>
   );
 }

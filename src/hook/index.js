@@ -10,6 +10,7 @@ function CartHook() {
 
     return response;
   };
+
   return { Buy, Delete };
 }
 

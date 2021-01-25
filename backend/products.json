@@ -91,67 +91,12 @@
   ],
   "user": [
     {
-      "email": "exemplo@email.com",
-      "password": "azsasdasdasdasd",
-      "firstName": "reidner",
-      "cpf": "648.645.645-64",
+      "email": "teste@email.com",
+      "password": "12345678",
+      "firstName": "Teste oficial",
+      "cpf": "123.213.232-32",
+      "loged": true,
       "id": 1
-    },
-    {
-      "email": "exemplo@email.com",
-      "password": "azsasdasdasdasd",
-      "firstName": "reidner",
-      "cpf": "648.645.645-64",
-      "id": 2
-    },
-    {
-      "email": "exemplo@email.com",
-      "password": "adasdasdasdas",
-      "firstName": "",
-      "cpf": "",
-      "id": 3
-    },
-    {
-      "email": "exemplo@email.com",
-      "password": "adasdasdasdas",
-      "firstName": "",
-      "cpf": "",
-      "id": 4
-    },
-    {
-      "email": "exemplo@email.com",
-      "password": "adasdasdasdas",
-      "firstName": "",
-      "cpf": "",
-      "id": 5
-    },
-    {
-      "email": "exemplo@email.com",
-      "password": "adasdasdasdas",
-      "firstName": "",
-      "cpf": "",
-      "id": 6
-    },
-    {
-      "email": "exemplo@email.com",
-      "password": "fdasfsafsadf",
-      "firstName": "",
-      "cpf": "",
-      "id": 7
-    },
-    {
-      "email": "exemplo@email.com",
-      "password": "fdasfsafsadf",
-      "firstName": "reidner",
-      "cpf": "645.645.645-64",
-      "id": 8
-    },
-    {
-      "email": "exemplo@email.com",
-      "password": "sdasdasdasd",
-      "firstName": "",
-      "cpf": "",
-      "id": 9
     }
   ],
   "cart": []

@@ -71,7 +71,15 @@ function shopcart() {
                 >
                   Nome
                 </Typography>
-                <Typography>Preço</Typography>
+                <Typography
+                  style={{
+                    marginLeft: 15,
+                    marginRight: 50,
+                  }}
+                >
+                  Preço
+                </Typography>
+                <Typography>Quantidade</Typography>
               </div>
               <Divider
                 style={{
@@ -113,7 +121,6 @@ function shopcart() {
                     >
                       R${product.price},00
                     </Typography>
-
                     <div
                       style={{
                         alignSelf: 'center',
@@ -161,6 +168,12 @@ function shopcart() {
             </Link>
           </div>
         )}
+        {/* {openBuyMessage && (
+          <BuyMessageSnackbars
+            openBuyMessage
+            handleCloseBuyMessage={handleCloseBuyMessage}
+          />
+        )} */}
         {products && products.length > 0 && (
           <div className={classes.card}>
             <Typography
