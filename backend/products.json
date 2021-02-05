@@ -97,7 +97,41 @@
       "cpf": "123.213.232-32",
       "loged": true,
       "id": 1
+    },
+    {
+      "email": "junior@gmail.com",
+      "password": "aaaaaaaaaa",
+      "firstName": "teste",
+      "cpf": "478.512.258-15",
+      "id": 2
+    },
+    {
+      "email": "exemplo@email.com",
+      "password": "52191508120",
+      "firstName": "reidner",
+      "cpf": "111.111.111-11",
+      "id": 3
+    },
+    {
+      "email": "adadasd@gmail.com",
+      "password": "12345645489",
+      "firstName": "sano",
+      "cpf": "785.482.166-51",
+      "id": 4
     }
   ],
-  "cart": []
+  "cart": [
+    {
+      "title": "Smartphone Samsung Galaxy S20 Azul 128GB, 8GB RAM, Tela Infinita de 6.2'', Câmera Tripla Traseira, Câmera Frontal 10MP, ",
+      "price": 2.199,
+      "picture": "https://images-submarino.b2w.io/produtos/01/00/item/133342/7/133342709_1GG.jpg",
+      "id": 1
+    },
+    {
+      "title": "Smartphone Samsung Galaxy S20 Azul 128GB, 8GB RAM, Tela Infinita de 6.2'', Câmera Tripla Traseira, Câmera Frontal 10MP, ",
+      "price": 2.199,
+      "picture": "https://images-submarino.b2w.io/produtos/01/00/item/133342/7/133342709_1GG.jpg",
+      "id": 2
+    }
+  ]
 }

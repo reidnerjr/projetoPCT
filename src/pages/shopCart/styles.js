@@ -28,11 +28,6 @@ const styles = makeStyles(() => ({
     display: 'flex',
     flexDirection: 'row',
   },
-  root: {
-    justifyContent: 'center',
-    display: 'flex',
-    flexDirection: 'column',
-  },
   card: {
     border: '1px solid #000',
     borderColor: 'gray',

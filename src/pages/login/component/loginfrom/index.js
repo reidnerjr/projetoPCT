@@ -69,7 +69,7 @@ export default function SignIn() {
   };
   const formik = useFormik({
     initialValues: {
-      email: 'exemplo@email.com',
+      email: '',
       password: '',
     },
     validationSchema: schema,

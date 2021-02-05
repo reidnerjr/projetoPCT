@@ -9,11 +9,9 @@ import styles from './styles';
 
 export default function HomePage() {
   const [products, setProducts] = useState([]);
-
   const getData = async () => {
     const response = await api.get('/products');
     const data = await response.data;
-
     setProducts(data);
   };
 

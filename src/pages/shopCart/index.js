@@ -3,7 +3,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 import styles from './styles';
 import CartHook from 'hook';
-
+// import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { Link } from 'react-router-dom';
@@ -19,12 +19,15 @@ function shopcart() {
     getData();
   };
   const [products, setProducts] = useState([]);
+  const mapearProducts = products.map((value) => value.price);
+  const produtoTotal =
+    products.length > 0 &&
+    mapearProducts.reduce((total, valorCorrente) => total + valorCorrente);
   const getData = async () => {
     const response = await api.get('/cart');
-    const data = await response.data;
+    const data = response.data;
     setProducts(data);
   };
-
   useEffect(() => {
     getData();
   }, []);
@@ -45,7 +48,7 @@ function shopcart() {
         </div>
       </Toolbar>
       <div className={classes.container}>
-        <div className={classes.root}>
+        <div>
           {products && products.length > 0 && (
             <>
               <div
@@ -74,12 +77,19 @@ function shopcart() {
                 <Typography
                   style={{
                     marginLeft: 15,
-                    marginRight: 50,
+                    marginRight: 60,
                   }}
                 >
                   Preço
                 </Typography>
-                <Typography>Quantidade</Typography>
+                <Typography
+                  style={{
+                    marginLeft: 15,
+                    marginRight: 60,
+                  }}
+                >
+                  Excluir
+                </Typography>
               </div>
               <Divider
                 style={{
@@ -119,12 +129,12 @@ function shopcart() {
                         marginLeft: 10,
                       }}
                     >
-                      R${product.price},00
+                      R$ {product.price},00
                     </Typography>
                     <div
                       style={{
                         alignSelf: 'center',
-                        marginLeft: 10,
+                        marginLeft: 70,
                       }}
                     >
                       <IconButton>
@@ -168,12 +178,6 @@ function shopcart() {
             </Link>
           </div>
         )}
-        {/* {openBuyMessage && (
-          <BuyMessageSnackbars
-            openBuyMessage
-            handleCloseBuyMessage={handleCloseBuyMessage}
-          />
-        )} */}
         {products && products.length > 0 && (
           <div className={classes.card}>
             <Typography
@@ -191,7 +195,7 @@ function shopcart() {
                 justifyContent: 'center',
               }}
             >
-              {/* Total R$ {product.price} */}
+              Total R$: {parseFloat(produtoTotal.toFixed(4))}
             </div>
             <Link
               to="/checkout"

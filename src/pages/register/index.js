@@ -39,7 +39,7 @@ export default function SignUp() {
   const [register, setRegister] = useState(false);
   const handleClose = () => {
     setRegister(false);
-    history.push('/');
+    history.push('/login');
   };
 
   const getData = async ({ email, password, firstName, cpf }) => {

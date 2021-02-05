@@ -5,12 +5,28 @@ import styles from './styles';
 import Divider from '@material-ui/core/Divider';
 import CartHook from 'hook';
 import api from 'services/api';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 
 function productsDetails(props) {
+  const [state, setState] = useState(false);
+
+  function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+  }
+
+  const handleClose = (reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setState(false);
+  };
   const { Buy } = CartHook();
   const { id } = props.match.params;
   const comprar = (product) => {
     Buy(product);
+    setState(true);
   };
   const [product, setProduct] = useState({});
   const getData = async () => {
@@ -49,6 +65,18 @@ function productsDetails(props) {
           <Typography
             className={classes.price}
           >{`R$ ${product.price}`}</Typography>
+          {state && (
+            <Snackbar
+              anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+              open={state}
+              autoHideDuration={3000}
+              onClose={handleClose}
+            >
+              <Alert onClose={handleClose} severity="success">
+                item adicionado no carrinho
+              </Alert>
+            </Snackbar>
+          )}
           <Button className={classes.button} onClick={() => comprar(product)}>
             ADICIONAR AO CARRINHO
           </Button>
